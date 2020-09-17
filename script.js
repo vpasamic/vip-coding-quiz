@@ -12,6 +12,7 @@ var questiondiv=document.getElementById("question")
 var scoreel=document.getElementById("score")
 var quiz=document.getElementById("quiz")
 quiz.style.display="none"
+endgame.style.display="none"
 //global variables
 var questions = 
 [{
@@ -64,7 +65,7 @@ function quizstart(){
     //if timer ends
         if (timer <= 0) {
         clearInterval(timerInterval)
-        showhs()
+        showscore()
     }
   },1000);
     
@@ -78,7 +79,7 @@ function quizstart(){
 //generates question
 function generate(){
    if (questionnumber === 4){
-       return showhs()
+       return showscore()
    }
     var currentquestions=questions[questionnumber]
     questiondiv.innerHTML = "<p>" + currentquestions.question + "</p>"
@@ -104,7 +105,7 @@ function checka (){
         timer=timer-15
     }
     else{
-        showhs();
+        showscore();
     }
 }
 
@@ -123,7 +124,7 @@ function checkb (){
         timer=timer-15
     }
     else{
-        showhs();
+        showscore();
     }
 }
 
@@ -144,7 +145,7 @@ function checkc (){
 
     }
     else{
-        showhs();
+        showscore();
     }
 }
 
@@ -165,18 +166,19 @@ function checkd (){
 
     }
     else{
-        showhs();
+        showscore();
     }
 }
 //shows high score
-function showhs(){
+function showscore(){
     scoreel.textContent=score
-
-
+    quiz.style.display="none"
+    endgame.style.display="block"
+    startdiv.style.display="none"
 }
 abtn.addEventListener("click", checka)
 bbtn.addEventListener("click", checkb)
 cbtn.addEventListener("click", checkc)
 dbtn.addEventListener("click", checkd)
 startbtn.addEventListener("click", quizstart)
-starthsbtn.addEventListener("click", showhs)
+starthsbtn.addEventListener("click", showscore)
