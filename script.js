@@ -11,6 +11,10 @@ var dbtn=document.getElementById("d")
 var questiondiv=document.getElementById("question")
 var scoreel=document.getElementById("score")
 var quiz=document.getElementById("quiz")
+var hsdiv=document.getElementById("highscores")
+var submitbtn=document.getElementById("submitbtn")
+var playagainbtn=document.getElementById("play-game")
+hsdiv.style.display="none"
 quiz.style.display="none"
 endgame.style.display="none"
 //global variables
@@ -176,9 +180,31 @@ function showscore(){
     endgame.style.display="block"
     startdiv.style.display="none"
 }
+
+function showhs(){
+    startdiv.style.display="none"
+    hsdiv.style.display="block"
+    endgame.style.display="none"
+}
+
+function replayquiz(){
+    startdiv.style.display="block"
+    hsdiv.style.display="none"
+    endgame.style.display="none"
+    quiz.style.display="none"
+    score = 0;
+    timer = questions.length*10;
+    questionnumber=0
+
+
+}
+
+//buttons list
 abtn.addEventListener("click", checka)
 bbtn.addEventListener("click", checkb)
 cbtn.addEventListener("click", checkc)
 dbtn.addEventListener("click", checkd)
 startbtn.addEventListener("click", quizstart)
-starthsbtn.addEventListener("click", showscore)
+starthsbtn.addEventListener("click", showhs)
+submitbtn.addEventListener("click", showhs)
+playagainbtn.addEventListener("click", replayquiz)
