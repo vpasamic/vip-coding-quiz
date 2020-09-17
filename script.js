@@ -9,6 +9,9 @@ var bbtn=document.getElementById("b")
 var cbtn=document.getElementById("c")
 var dbtn=document.getElementById("d")
 var questiondiv=document.getElementById("question")
+var scoreel=document.getElementById("score")
+var quiz=document.getElementById("quiz")
+quiz.style.display="none"
 //global variables
 var questions = 
 [{
@@ -26,59 +29,148 @@ var questions =
     c:"Math.floor(Math.random()*10)",
     d:"Math.floor(Math.random(0,10)",
     correctanswer:"c",
-}]
+},
+{   
+    question:"which is a logical operator in javascript",
+    a:"&&",
+    b:"|",
+    c:"%",
+    d:"/",
+    correctanswer:"a",
+},
+{   
+    question:"how to set variables?",
+    a:"vic",
+    b:"variable",
+    c:"v",
+    d:"var",
+    correctanswer:"d",
+},
+]
 
 var score = 0;
 var timer = questions.length*10;
 var questionnumber=0
 var correct;
+var quizlength = 4
 
-function settime() {
-    //time ticks
+//starts quiz
+function quizstart(){
+    //interval creation
+    timerdiv.textContent = timer;
     var timerInterval = setInterval(function(){
         timer--;
         timerdiv.textContent = timer;
     //if timer ends
         if (timer <= 0) {
         clearInterval(timerInterval)
+        showhs()
     }
   },1000);
-}
-// settime()
-function quizstart(){
+    
     console.log("hi")
-    settime()
+  
+   
     generate()
-
+  startdiv.style.display="none"
+  quiz.style.display="block"
 }
 //generates question
 function generate(){
+   if (questionnumber === 4){
+       return showhs()
+   }
     var currentquestions=questions[questionnumber]
     questiondiv.innerHTML = "<p>" + currentquestions.question + "</p>"
     abtn.textContent=currentquestions.a
     bbtn.textContent=currentquestions.b
     cbtn.textContent=currentquestions.c
     dbtn.textContent=currentquestions.d
+    
+
 }
 //check answers
 function checka (){
-    generate()
-    questionnumber++
+    var correct = questions[questionnumber].correctanswer
+    if (correct === "a" && questionnumber !== quizlength){
+        score++
+        questionnumber++
+        generate()   
+    }
+    else if (correct !== "a" && questionnumber !== quizlength){
+        questionnumber++
+        score--
+        generate() 
+        timer=timer-15
+    }
+    else{
+        showhs();
+    }
 }
 
 function checkb (){
-    generate()
-    questionnumber++
+    
+    var correct = questions[questionnumber].correctanswer
+    if (correct === "b"&& questionnumber !== quizlength){
+        score++
+        questionnumber++
+        generate()   
+    }
+    else if(correct !== "b"&& questionnumber !== quizlength) {
+        questionnumber++
+        generate() 
+        score--
+        timer=timer-15
+    }
+    else{
+        showhs();
+    }
 }
+
 function checkc (){
-    generate()
-    questionnumber++
+    var correct = questions[questionnumber].correctanswer
+    if(correct === "c"&& questionnumber !== quizlength){
+        score++
+        questionnumber++
+        generate()   
+        
+
+    }
+    else if(correct !== "c"&& questionnumber !== quizlength){
+        questionnumber++
+        generate() 
+        score--
+        timer=timer-15
+
+    }
+    else{
+        showhs();
+    }
 }
+
 function checkd (){
-    generate()
-    questionnumber++
+    var correct = questions[questionnumber].correctanswer
+    if(correct === "d"&& questionnumber !== quizlength){
+        score++
+        questionnumber++
+        generate()   
+       
+
+    }
+    else if(correct !== "d"&& questionnumber !== quizlength){
+        score--
+        questionnumber++
+        generate() 
+        timer=timer-15
+
+    }
+    else{
+        showhs();
+    }
 }
+//shows high score
 function showhs(){
+    scoreel.textContent=score
 
 
 }
