@@ -14,6 +14,11 @@ var quiz=document.getElementById("quiz")
 var hsdiv=document.getElementById("highscores")
 var submitbtn=document.getElementById("submitbtn")
 var playagainbtn=document.getElementById("play-game")
+var initialsinput= document.getElementById("initials")
+var hsnamesdiv=document.getElementById("highscore-users")
+var hspointsdiv=document.getElementById("highest-scores")
+var clearhsbtn= document.getElementById("clearhs")
+
 hsdiv.style.display="none"
 quiz.style.display="none"
 endgame.style.display="none"
@@ -179,12 +184,26 @@ function showscore(){
     quiz.style.display="none"
     endgame.style.display="block"
     startdiv.style.display="none"
+    ;
 }
 
 function showhs(){
     startdiv.style.display="none"
     hsdiv.style.display="block"
     endgame.style.display="none"
+    hsnamesdiv.innerHTML=""
+    hspointsdiv.innerHTML=""
+    var savehs =JSON.parse(localStorage.getItem("savehs")) || [];
+    for(var i=0; i<savehs.length; i++){
+        var nameli=document.createElement("li");
+        var pointsli=document.createElement("li");
+        pointsli.textcontent=savehs[i].score;
+        nameli.textcontent=savehs[i].name
+        hsnamesdiv.appendChild(nameli);
+        hspointsdiv.appendChild(pointsli);
+        console.log(savehs[i].score)
+    }
+    
 }
 
 function replayquiz(){
@@ -199,6 +218,33 @@ function replayquiz(){
 
 }
 
+function addhs(){
+    if (initialsinput.value=== ""){
+       alert("initials cannot be empty")
+     
+        
+    }
+    else{
+       var savehs =JSON.parse(localStorage.getItem("savehs")) || [];
+       var user=initialsinput.value.trim();
+       var currenths = {
+           name: user,
+           score: score
+       };
+       savehs.push(currenths);
+       localStorage.setItem("savehs", JSON.stringify(savehs));
+      
+
+       showhs()
+
+    }
+}
+
+function clearhs(){
+    window.localStorage.clear();
+    hsnamesdiv.textContent="";
+    hspointsdiv.textContent="";
+}
 //buttons list
 abtn.addEventListener("click", checka)
 bbtn.addEventListener("click", checkb)
@@ -206,5 +252,6 @@ cbtn.addEventListener("click", checkc)
 dbtn.addEventListener("click", checkd)
 startbtn.addEventListener("click", quizstart)
 starthsbtn.addEventListener("click", showhs)
-submitbtn.addEventListener("click", showhs)
+submitbtn.addEventListener("click",addhs)
 playagainbtn.addEventListener("click", replayquiz)
+clearhsbtn.addEventListener("click", clearhs)
