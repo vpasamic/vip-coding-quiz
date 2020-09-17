@@ -1,2 +1,2 @@
 # vip-coding-quiz
-![screenshot](https://github.com/vpasamic/vip-coding-quiz/master/codingpic.JPG?raw=true)
+![screenshot](/relative/path/to/codingpic.JPG?raw=true)
