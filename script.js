@@ -18,7 +18,7 @@ var initialsinput= document.getElementById("initials")
 var hsnamesdiv=document.getElementById("highscore-users")
 var hspointsdiv=document.getElementById("highest-scores")
 var clearhsbtn= document.getElementById("clearhs")
-
+//hides unnecessary divs till necessary
 hsdiv.style.display="none"
 quiz.style.display="none"
 endgame.style.display="none"
@@ -178,7 +178,7 @@ function checkd (){
         showscore();
     }
 }
-//shows high score
+//shows score
 function showscore(){
     scoreel.textContent=score
     quiz.style.display="none"
@@ -186,7 +186,7 @@ function showscore(){
     startdiv.style.display="none"
     ;
 }
-
+//displays highscore page
 function showhs(){
     startdiv.style.display="none"
     hsdiv.style.display="block"
@@ -203,7 +203,7 @@ function showhs(){
     }
     
 }
-
+//resets quiz
 function replayquiz(){
     startdiv.style.display="block"
     hsdiv.style.display="none"
@@ -215,7 +215,7 @@ function replayquiz(){
 
 
 }
-
+//adds highscores into local storage
 function addhs(){
     if (initialsinput.value=== ""){
        alert("initials cannot be empty")
@@ -237,7 +237,7 @@ function addhs(){
 
     }
 }
-
+//clears local storage
 function clearhs(){
     window.localStorage.clear();
     hsnamesdiv.textContent="";
