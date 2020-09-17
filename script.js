@@ -62,7 +62,7 @@ var score = 0;
 var timer = questions.length*10;
 var questionnumber=0
 var correct;
-var quizlength = 4
+var quizlength = questions.length
 
 //starts quiz
 function quizstart(){
@@ -212,6 +212,7 @@ function replayquiz(){
     score = 0;
     timer = questions.length*10;
     questionnumber=0
+    initialsinput.value=""
 
 
 }
