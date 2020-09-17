@@ -195,13 +195,11 @@ function showhs(){
     hspointsdiv.innerHTML=""
     var savehs =JSON.parse(localStorage.getItem("savehs")) || [];
     for(var i=0; i<savehs.length; i++){
-        var nameli=document.createElement("li");
-        var pointsli=document.createElement("li");
-        pointsli.textcontent=savehs[i].score;
-        nameli.textcontent=savehs[i].name
-        hsnamesdiv.appendChild(nameli);
+        var pointsli=document.createElement("h2");
+        pointsli.innerHTML= "name: " + savehs[i].name + " score: " +savehs[i].score;
+        
         hspointsdiv.appendChild(pointsli);
-        console.log(savehs[i].score)
+       
     }
     
 }
